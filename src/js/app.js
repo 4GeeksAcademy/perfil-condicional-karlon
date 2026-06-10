@@ -32,15 +32,19 @@ function render(variables = {}) {
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
+          <img src="${variables.avatarURL ||
+            "https://randomuser.me/api/portraits/women/42.jpg"}" class="photo" />
           <h1>${variables.name || "Name"} ${variables.lastName ||
     "Last Name"} </h1>
           <h2> ${variables.role || "Role"} </h2>
-           <h3>${variables.city || ""}, ${variables.country || ""}</h3>
+           <h3>${
+             variables.city && variables.country
+               ? `${variables.city}, ${variables.country}`
+               : variables.city || variables.country || ""
+           }</h3>
           <ul class="${variables.socialMediaPosition}">
-            <li><a href="https://twitter.com/${
-              variables.twitter ? variables.twitter : "karlon"
-            }"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://twitter.com/${variables.twitter ||
+              "karlon"}"><i class="fab fa-twitter"></i></a></li>
             <li><a href="https://github.com/${
               variables.github ? variables.github : "karlon"
             }"><i class="fab fa-github"></i></a></li>
